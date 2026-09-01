@@ -61,9 +61,9 @@ git clone https://github.com/Ojaswy/lanparty.git
 cd lanparty/examples/lanparty
 npm install
 npm run dev:demo
+Open **http://localhost:5173** and press START PARTY.
 ```
 
-Open **http://localhost:5173** and press START PARTY.
 
 Demo mode replays recorded runs instead of renting real computers, so it costs nothing and needs no keys. Everything is stamped **DEMO REPLAY** so it can never be mistaken for a real result.
 
