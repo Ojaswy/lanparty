@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Meridian Mutual - Provider Services Portal</title>
+<style>
+html,body{margin:0;padding:0;background:#ffffff;color:#000000;font:11px Verdana,Arial,Helvetica,sans-serif}
+a{color:#000080}
+table{border-collapse:collapse}
+td{font:11px Verdana,Arial,Helvetica,sans-serif;vertical-align:top}
+.hdr{background:#000080}
+.hdr td{color:#ffffff;vertical-align:middle}
+.brand{font:bold 22px "Times New Roman",Times,serif;letter-spacing:1px;padding:8px 14px;white-space:nowrap}
+.brand small{font:11px Verdana,Arial,sans-serif;color:#c0c0ff;letter-spacing:0;font-weight:normal}
+.hdrlinks{font:10px Verdana,Arial,sans-serif;padding:8px 14px;text-align:right}
+.banner{background:#ffffcc;border-top:1px solid #cc9900;border-bottom:1px solid #cc9900;color:#cc0000;font-weight:bold;padding:3px 10px}
+.banner a{color:#000080}
+.nav{background:#c0c0c0;border-bottom:2px solid #808080;padding:3px 10px}
+.nav a{color:#000080;font-weight:bold;text-decoration:none;margin-right:6px}
+.nav span{color:#808080;margin-right:6px}
+.side{background:#e8e8e8;width:150px;border-right:1px solid #999999;padding:8px}
+.side h4{margin:0 0 4px;font:bold 11px Verdana,Arial,sans-serif;color:#000080;border-bottom:1px solid #999999;padding-bottom:2px}
+.side a{display:block;margin:4px 0}
+.content{padding:10px 18px 4px 18px}
+h1{font:bold 17px "Times New Roman",Times,serif;color:#000080;margin:0 0 6px}
+h2{font:bold 12px Verdana,Arial,sans-serif;color:#000080;margin:12px 0 4px}
+p{margin:6px 0}
+hr{border:0;border-top:1px solid #808080;height:0;margin:8px 0}
+.stepbar{background:#e8e8e8;border:1px solid #999999;padding:3px 6px;margin-bottom:8px;color:#404040;width:626px}
+.stepbar b{color:#000080}
+.btn{font:11px Verdana,Arial,sans-serif;color:#000000;background:#c0c0c0;border-top:2px solid #ffffff;border-left:2px solid #ffffff;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:2px 12px;cursor:pointer;margin:0}
+.btn:active{border-top:2px solid #404040;border-left:2px solid #404040;border-right:2px solid #ffffff;border-bottom:2px solid #ffffff}
+.btn:disabled{color:#808080;cursor:default}
+.btn.green{background:#008000;color:#ffffff;font-weight:bold;font-size:12px;padding:5px 18px}
+.btn.blue{background:#000080;color:#ffffff;font-weight:bold;font-size:12px;padding:5px 18px}
+input[type=text],textarea,select{font:11px Verdana,Arial,sans-serif;color:#000000;background:#ffffff}
+input[type=text],textarea{border:2px inset #c0c0c0}
+table.data td,table.data th{border:1px solid #808080;padding:3px 6px;font:11px Verdana,Arial,sans-serif;vertical-align:top}
+table.data th{background:#c0c0c0;text-align:left}
+table.form td{padding:4px 6px 4px 0}
+.err{color:#ff0000;font-weight:bold}
+.ok{color:#008000;font-weight:bold}
+.hint{color:#404040}
+.letter{border:1px solid #000000;background:#fffff8;padding:10px 16px;font:12px "Times New Roman",Times,serif;width:606px}
+.letter td{font:12px "Times New Roman",Times,serif;padding:1px 8px 1px 0}
+.letter p{margin:6px 0}
+.note{border:2px dashed #cc0000;background:#ffffe0;padding:6px 8px;margin:8px 0;width:620px}
+.terms{border:1px solid #808080;background:#f8f8f8;padding:8px 10px;width:618px;line-height:1.55}
+.terms p{margin:0 0 5px}
+.footer{border-top:1px solid #808080;margin-top:12px;padding:6px 10px 8px;font:10px Verdana,Arial,sans-serif;color:#404040;text-align:center;line-height:1.7}
+.counter span{display:inline-block;background:#000000;color:#00ff00;font:bold 12px "Courier New",Courier,monospace;padding:0 3px;border:1px solid #808080;margin:0 1px}
+.view{display:none}
+.view.on{display:block}
+#overlay{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:100}
+#modal{position:absolute;left:50%;top:50%;width:470px;margin-left:-235px;margin-top:-150px;background:#c0c0c0;border-top:2px solid #ffffff;border-left:2px solid #ffffff;border-right:2px solid #404040;border-bottom:2px solid #404040}
+#modal .mt{background:#000080;color:#ffffff;font:bold 11px Verdana,Arial,sans-serif;padding:3px 6px}
+#modal .mb{padding:12px 14px}
+#modal .mb p{margin:0 0 8px}
+</style>
+</head>
+<body>
+
+<!-- ===== PORTAL NOTICE modal (must be acknowledged) ===== -->
+<div id="overlay">
+ <div id="modal">
+  <div class="mt">PORTAL NOTICE</div>
+  <div class="mb">
+   <p><b>NOTICE TO ALL USERS:</b> This is a private computer system operated by Meridian Mutual Insurance Company for the use of authorized participating providers only.</p>
+   <p>Use of this system constitutes consent to monitoring, recording and auditing. Information transmitted through this portal is confidential and may contain protected health information subject to HIPAA.</p>
+   <p>Unauthorized access or use is prohibited and may be subject to civil and criminal penalties. If you are not an authorized user, exit the portal now.</p>
+   <p style="text-align:center;margin-top:14px"><button type="button" class="btn" id="b-exit">Exit Portal</button> &nbsp; &nbsp; &nbsp; <button type="button" class="btn" id="b-ack">I Acknowledge</button></p>
+  </div>
+ </div>
+</div>
+
+<!-- ===== header ===== -->
+<table width="100%" cellpadding="0" cellspacing="0" class="hdr"><tr>
+ <td class="brand">MERIDIAN MUTUAL <small>&mdash; Provider Services Portal</small></td>
+ <td class="hdrlinks">Secure Server (128-bit SSL) &nbsp;|&nbsp; User: LAKESIDE_ORTHO &nbsp;|&nbsp; Last login: 08/31/2026 04:12 PM</td>
+</tr></table>
+<div class="banner">** WARNING: Your session will expire in <span id="timer">14:59</span>. <a href="javascript:void(0)" id="extend">Click here to extend your session.</a> &nbsp; Unsaved information will be lost.</div>
+<div class="nav" id="navbar">
+ <a href="javascript:void(0)" data-go="home">Home</a><span>|</span>
+ <a href="javascript:void(0)" data-go="status">Claims</a><span>|</span>
+ <a href="javascript:void(0)" data-go="step1">Appeals</a><span>|</span>
+ <a href="javascript:void(0)">Eligibility</a><span>|</span>
+ <a href="javascript:void(0)">Remittance</a><span>|</span>
+ <a href="javascript:void(0)">Provider Manual</a><span>|</span>
+ <a href="javascript:void(0)">Contact Us</a>
+</div>
+
+<!-- ===== body ===== -->
+<table width="100%" cellpadding="0" cellspacing="0"><tr>
+<td class="side" id="sidebar">
+ <h4>PROVIDER MENU</h4>
+ <a href="javascript:void(0)" data-go="home">&raquo; Home</a>
+ <a href="javascript:void(0)" data-go="status">&raquo; Claim Inquiry</a>
+ <a href="javascript:void(0)" data-go="step1">&raquo; File an Appeal</a>
+ <a href="javascript:void(0)">&raquo; Eligibility Verification</a>
+ <a href="javascript:void(0)">&raquo; Remittance Advice</a>
+ <a href="javascript:void(0)">&raquo; Fee Schedules</a>
+ <a href="javascript:void(0)">&raquo; Forms Library</a>
+ <a href="javascript:void(0)">&raquo; Contact Us</a>
+ <h4 style="margin-top:14px">SYSTEM STATUS</h4>
+ <div style="color:#008000">&#8226; All systems normal</div>
+ <div style="margin-top:6px;color:#404040">Last refresh:<br>09/01/2026 06:00 AM EST</div>
+</td>
+<td class="content">
+
+<!-- VIEW 0: home / denial letter -->
+<div class="view" id="v-home">
+ <h1>Correspondence: Notice of Claim Denial</h1>
+ <div class="letter">
+  <table width="100%"><tr>
+   <td><b>MERIDIAN MUTUAL INSURANCE COMPANY</b><br>Claims Review Department<br>P.O. Box 4471, Hartford, CT 06101</td>
+   <td style="text-align:right">August 12, 2026<br>Letter ID: DL-0812-7731<br>Page 1 of 1</td>
+  </tr></table>
+  <hr>
+  <div style="text-align:center;font-weight:bold;font-size:13px;margin:4px 0 8px">NOTICE OF CLAIM DENIAL</div>
+  <table>
+   <tr><td><b>Claim Number:</b></td><td>CLM-2026-004471</td></tr>
+   <tr><td><b>Patient:</b></td><td>Dolores P. Whitfield, DOB 03/14/1957</td></tr>
+   <tr><td><b>Date of Service:</b></td><td>07/22/2026</td></tr>
+   <tr><td><b>Provider:</b></td><td>Lakeside Orthopedic Associates</td></tr>
+   <tr><td><b>Billed Amount:</b></td><td>$4,860.00</td></tr>
+   <tr><td><b>Denial Reason Code:</b></td><td>CO-197 &mdash; Precertification/authorization absent</td></tr>
+  </table>
+  <p>Dear Provider:</p>
+  <p>We have reviewed the above-referenced claim and are unable to approve payment at this time. Our records indicate no precertification on file. If a valid authorization exists, file an appeal and cite the authorization number. Appeals must be received within 60 days of the date of this notice.</p>
+  <p>Sincerely,<br><i>Claims Review Department</i></p>
+ </div>
+ <div class="note"><b>Provider notes (internal)</b><br>Prior authorization WAS obtained: Auth # PA-88213, approved 07/15/2026 by phone.</div>
+ <p><button type="button" class="btn" id="b-appeal">File an Appeal</button> &nbsp; <button type="button" class="btn" id="b-status">Check Claim Status</button> &nbsp; <button type="button" class="btn" id="b-print">Print Letter</button></p>
+</div>
+
+<!-- dead end: claim status -->
+<div class="view" id="v-status">
+ <h1>Claim Status Inquiry</h1>
+ <p>Results for provider LAKESIDE ORTHOPEDIC ASSOCIATES (Tax ID ***-**-4471), last 90 days:</p>
+ <table class="data" width="626">
+  <tr><th>Claim #</th><th>Patient</th><th>Date of Service</th><th>Status</th><th>Paid Amount</th></tr>
+  <tr><td colspan="5" style="text-align:center;padding:14px;color:#808080">No records found matching your search criteria.</td></tr>
+ </table>
+ <p>Claim status records are refreshed nightly. Claims in denied or appeal status are not displayed in this inquiry. For assistance call Provider Services at 1-800-555-0147, Monday through Friday, 8:00 AM to 5:00 PM EST.</p>
+ <p><button type="button" class="btn" id="b-status-home">Return to Home</button></p>
+</div>
+
+<!-- dead end: goodbye -->
+<div class="view" id="v-goodbye">
+ <h1>Session Ended</h1>
+ <p>You have exited the Meridian Mutual Provider Services Portal. Your session has been terminated and any unsaved information has been discarded.</p>
+ <p>You may now close this browser window.</p>
+ <p style="color:#808080">Thank you for using Meridian Mutual Provider Services.</p>
+</div>
+
+<!-- VIEW 1: step 1 -->
+<div class="view" id="v-step1">
+ <h1>Appeal &mdash; Step 1 of 3: Claim Lookup</h1>
+ <div class="stepbar"><b>Step 1: Claim Lookup</b> &nbsp;&raquo;&nbsp; Step 2: Appeal Details &nbsp;&raquo;&nbsp; Step 3: Review &amp; Submit</div>
+ <p>Enter the claim number and the patient's date of birth exactly as they appear on the denial notice. All fields are required.</p>
+ <table class="form">
+  <tr><td><label for="claimNo"><b>Claim Number:</b></label></td>
+      <td><input type="text" id="claimNo" size="26" maxlength="24" autocomplete="off"> <span class="err" id="e-claim"></span></td></tr>
+  <tr><td><b>Patient Date of Birth:</b></td>
+      <td><select id="dobM" aria-label="Month of birth"></select> <select id="dobD" aria-label="Day of birth"></select> <select id="dobY" aria-label="Year of birth"></select> <span class="err" id="e-dob"></span></td></tr>
+ </table>
+ <hr>
+ <p><button type="button" class="btn green" id="b-draft">Save Draft</button> &nbsp; &nbsp; <button type="button" class="btn" id="b-s1next">Continue</button></p>
+ <p class="ok" id="m-draft"></p>
+</div>
+
+<!-- VIEW 2: step 2 -->
+<div class="view" id="v-step2">
+ <h1>Appeal &mdash; Step 2 of 3: Appeal Details</h1>
+ <div class="stepbar">Step 1: Claim Lookup &nbsp;&raquo;&nbsp; <b>Step 2: Appeal Details</b> &nbsp;&raquo;&nbsp; Step 3: Review &amp; Submit</div>
+ <p>Claim <b id="s2claim"></b> &mdash; WHITFIELD, DOLORES P &mdash; Denial code CO-197</p>
+ <table class="form">
+  <tr><td><label for="reason"><b>Reason for appeal:</b></label></td>
+      <td><select id="reason">
+        <option value="">-- select --</option>
+        <option value="timely_filing">Timely filing</option>
+        <option value="precert_on_file">Precertification was obtained (authorization on file)</option>
+        <option value="medical_necessity">Medical necessity</option>
+        <option value="duplicate">Duplicate claim</option>
+        <option value="other">Other</option>
+      </select> <span class="err" id="e-reason"></span></td></tr>
+  <tr><td><label for="just"><b>Justification:</b></label></td>
+      <td><textarea id="just" rows="6" cols="72"></textarea><br>
+          <span class="hint">Minimum 40 characters. Describe the basis for this appeal.</span><br>
+          <span class="err" id="e-just"></span></td></tr>
+  <tr><td></td>
+      <td><input type="checkbox" id="attest"> <label for="attest">I attest that supporting records are attached to this appeal</label><br><span class="err" id="e-attest"></span></td></tr>
+ </table>
+ <hr>
+ <p><button type="button" class="btn" id="b-s2back">Back</button> &nbsp; <button type="button" class="btn" id="b-s2next">Continue</button></p>
+</div>
+
+<!-- VIEW 3: step 3 (deliberately long; needs scrolling) -->
+<div class="view" id="v-step3">
+ <h1>Appeal &mdash; Step 3 of 3: Review &amp; Submit</h1>
+ <div class="stepbar">Step 1: Claim Lookup &nbsp;&raquo;&nbsp; Step 2: Appeal Details &nbsp;&raquo;&nbsp; <b>Step 3: Review &amp; Submit</b></div>
+ <p>Please review the information below and read the terms and conditions in full before submitting.</p>
+ <table class="data" width="626" id="review"></table>
+ <h2>TERMS AND CONDITIONS OF ELECTRONIC APPEAL SUBMISSION</h2>
+ <div class="terms">
+  <p>1. DEFINITIONS. For purposes of these Terms, "Company" means Meridian Mutual Insurance Company and its affiliates; "Provider" means the individual or entity submitting this appeal; "Portal" means the Provider Services Portal and all related systems and databases.</p>
+  <p>2. SCOPE. These Terms govern the electronic submission of claim appeals through the Portal and supplement, but do not replace, the Provider Participation Agreement between Provider and Company.</p>
+  <p>3. ACCURACY OF INFORMATION. Provider represents and warrants that all information submitted through the Portal is true, complete and accurate to the best of Provider's knowledge and belief.</p>
+  <p>4. AUTHORIZATION TO SUBMIT. The individual completing this form represents that he or she is duly authorized to act on behalf of Provider and to bind Provider to these Terms.</p>
+  <p>5. SUPPORTING DOCUMENTATION. Provider agrees to furnish, upon request, all medical records, authorization records, and other documentation relevant to the appeal within ten (10) business days of such request.</p>
+  <p>6. TIMELINESS. Appeals must be received within sixty (60) calendar days of the date of the denial notice unless a longer period is required by applicable law or by the Provider Participation Agreement.</p>
+  <p>7. LEVEL OF REVIEW. This submission constitutes a first-level provider appeal. Second-level appeals may be requested in writing within thirty (30) days following the outcome of first-level review.</p>
+  <p>8. NO GUARANTEE. Submission of an appeal does not guarantee reversal of the original determination or payment of any claim, in whole or in part.</p>
+  <p>9. REVIEW PERIOD. Company will make reasonable efforts to render a written decision within thirty (30) business days of receipt of a complete appeal.</p>
+  <p>10. INCOMPLETE APPEALS. Appeals lacking required information may be returned without review, and the timely filing period shall not be tolled during any such return.</p>
+  <p>11. ELECTRONIC SIGNATURE. Provider agrees that activating the Submit Appeal control constitutes an electronic signature having the same force and effect as a handwritten signature.</p>
+  <p>12. ELECTRONIC RECORDS. Provider consents to receive notices, decisions and correspondence related to this appeal in electronic form and acknowledges that such records may be relied upon by Company.</p>
+  <p>13. AUDIT RIGHTS. Company reserves the right to audit any claim, appeal or supporting documentation at any time in accordance with the Provider Participation Agreement and applicable law.</p>
+  <p>14. FRAUD WARNING. Any person who knowingly files an appeal containing false, incomplete or misleading information may be subject to criminal and civil penalties under state and federal law.</p>
+  <p>15. CONFIDENTIALITY. Provider shall safeguard all protected health information transmitted through the Portal in accordance with HIPAA and applicable state privacy law.</p>
+  <p>16. SYSTEM AVAILABILITY. Company does not warrant that the Portal will be available at all times and shall not be liable for any delay or loss caused by system unavailability or interruption.</p>
+  <p>17. SESSION SECURITY. Provider is responsible for maintaining the confidentiality of user identifications and passwords and for all activity conducted under such credentials.</p>
+  <p>18. BROWSER REQUIREMENTS. The Portal is optimized for Microsoft Internet Explorer 5.5 or later at 800x600 resolution. Use of other browsers may result in reduced functionality.</p>
+  <p>19. PRECERTIFICATION APPEALS. Appeals asserting that an authorization was obtained must reference the authorization number assigned by Company at the time of approval.</p>
+  <p>20. MEDICAL NECESSITY APPEALS. Appeals based on medical necessity will be reviewed by a licensed clinical reviewer of the same or a similar specialty.</p>
+  <p>21. TIMELY FILING APPEALS. Appeals of timely filing denials must include documentary proof of the original submission date.</p>
+  <p>22. DUPLICATE SUBMISSIONS. Duplicate appeals for the same claim will be consolidated, and the earliest received submission shall control.</p>
+  <p>23. WITHDRAWAL. Provider may withdraw an appeal at any time prior to decision by written request to the Claims Review Department.</p>
+  <p>24. BALANCE BILLING. Provider agrees not to bill the member for services under appeal except as expressly permitted by the member's benefit plan.</p>
+  <p>25. COORDINATION OF BENEFITS. Where other coverage exists, Company's obligation shall be determined in accordance with applicable coordination of benefits rules.</p>
+  <p>26. RECOUPMENT. Nothing herein limits Company's right to recoup overpayments identified during the appeal process.</p>
+  <p>27. INTEREST. No interest shall accrue on any amount during the pendency of an appeal except as required by applicable prompt-payment law.</p>
+  <p>28. GOVERNING LAW. These Terms shall be governed by the laws of the State of Connecticut without regard to its conflict of law principles.</p>
+  <p>29. VENUE. Any dispute arising hereunder shall be brought exclusively in the state or federal courts located in Hartford County, Connecticut.</p>
+  <p>30. ARBITRATION. Notwithstanding Section 29, disputes subject to arbitration under the Provider Participation Agreement shall be resolved by binding arbitration.</p>
+  <p>31. LIMITATION OF LIABILITY. In no event shall Company be liable for indirect, incidental, special or consequential damages arising from use of the Portal.</p>
+  <p>32. INDEMNIFICATION. Provider agrees to indemnify and hold harmless Company from and against any claims arising from Provider's breach of these Terms.</p>
+  <p>33. SEVERABILITY. If any provision of these Terms is held invalid or unenforceable, the remaining provisions shall continue in full force and effect.</p>
+  <p>34. WAIVER. Failure of Company to enforce any provision shall not constitute a waiver of such provision or of any other provision.</p>
+  <p>35. AMENDMENT. Company may amend these Terms at any time by posting revised Terms on the Portal. Continued use of the Portal constitutes acceptance of the revised Terms.</p>
+  <p>36. ASSIGNMENT. Provider may not assign its rights or obligations under these Terms without the prior written consent of Company.</p>
+  <p>37. NOTICES. Notices to Company shall be sent to Claims Review Department, P.O. Box 4471, Hartford, CT 06101, and shall be deemed received three (3) business days after mailing.</p>
+  <p>38. ENTIRE AGREEMENT. These Terms, together with the Provider Participation Agreement, constitute the entire agreement of the parties regarding electronic appeal submission.</p>
+  <p>39. HEADINGS. Section headings are for convenience of reference only and shall not affect the interpretation of these Terms.</p>
+  <p>40. ACKNOWLEDGMENT. By submitting this appeal, Provider acknowledges having read, understood and agreed to these Terms in their entirety.</p>
+ </div>
+ <p id="m-submit"></p>
+ <table><tr>
+  <td style="padding:6px 18px 6px 0"><button type="button" class="btn blue" id="b-cancel">Cancel Appeal</button></td>
+  <td style="padding:6px 0"><button type="button" class="btn" id="b-submit">Submit Appeal</button></td>
+ </tr></table>
+</div>
+
+<!-- VIEW 4: confirmation -->
+<div class="view" id="v-done">
+ <h1>Appeal Submitted</h1>
+ <div style="border:1px solid #008000;background:#f0fff0;padding:14px;width:596px">
+  <div style="font:bold 20px 'Times New Roman',Times,serif;color:#000080">Appeal received. Reference number: <span id="refno">APL-000000</span></div>
+  <p>Your appeal has been transmitted to the Claims Review Department. Please retain this reference number for your records. A written determination will be mailed within 30 business days.</p>
+ </div>
+ <p><button type="button" class="btn" id="b-home2">Return to Home</button></p>
+</div>
+
+</td></tr></table>
+
+<!-- ===== footer ===== -->
+<div class="footer">
+ <span class="counter">You are visitor number <span>0</span><span>0</span><span>4</span><span>7</span><span>1</span><span>2</span><span>9</span></span><br>
+ Best viewed in Internet Explorer 5.5 at 800x600 &nbsp;|&nbsp; This site is secured with 128-bit SSL encryption &nbsp;|&nbsp; Terminal ID: <span id="seatlbl">anon</span><br>
+ &copy;1998-2002 Meridian Mutual Insurance Company. All rights reserved.
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var CLAIM = 'CLM-2026-004471';
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var VIEWS = ['home','status','goodbye','step1','step2','step3','done'];
+  function byId(id) { return document.getElementById(id); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  /* ---------- seat key (LANPARTY harness): ?seat=..., #seat=..., sessionStorage, else "anon" ---------- */
+  function findSeat() {
+    var m = /[?&]seat=([^&#]*)/.exec(window.location.search);
+    if (m && m[1]) return decodeURIComponent(m[1]);
+    m = /[#&]seat=([^&#]*)/.exec(window.location.hash);
+    if (m && m[1]) return decodeURIComponent(m[1]);
+    try { var s = window.sessionStorage.getItem('lanparty_seat'); if (s) return s; } catch (e) {}
+    return 'anon';
+  }
+  var SEAT = findSeat();
+  try { window.sessionStorage.setItem('lanparty_seat', SEAT); } catch (e) {}
+  window.LANPARTY_SEAT = SEAT;
+  byId('seatlbl').textContent = SEAT;
+
+  /* ---------- appeal state ---------- */
+  var state;
+  function clearState() {
+    state = { claimNumber: '', dobMonth: '', dobDay: '', dobYear: '', reason: '', reasonLabel: '', justification: '', attested: false };
+    byId('claimNo').value = '';
+    byId('dobM').selectedIndex = 0; byId('dobD').selectedIndex = 0; byId('dobY').selectedIndex = 0;
+    byId('reason').selectedIndex = 0; byId('just').value = ''; byId('attest').checked = false;
+    ['e-claim','e-dob','e-reason','e-just','e-attest','m-draft','m-submit'].forEach(function (id) { byId(id).textContent = ''; });
+  }
+
+  /* ---------- view switching ---------- */
+  function show(name) {
+    VIEWS.forEach(function (v) { byId('v-' + v).className = 'view' + (v === name ? ' on' : ''); });
+    var chrome = (name === 'goodbye') ? 'none' : '';
+    byId('sidebar').style.display = chrome;
+    byId('navbar').style.display = chrome;
+    window.scrollTo(0, 0);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('a[data-go]'), function (a) {
+    a.addEventListener('click', function (ev) { ev.preventDefault(); show(a.getAttribute('data-go')); });
+  });
+
+  /* ---------- session countdown: counts down, wraps, never expires ---------- */
+  var SESSION = 14 * 60 + 59, secs = SESSION;
+  function tick() { secs -= 1; if (secs < 0) secs = SESSION; byId('timer').textContent = pad(Math.floor(secs / 60)) + ':' + pad(secs % 60); }
+  setInterval(tick, 1000);
+  byId('extend').addEventListener('click', function (ev) { ev.preventDefault(); secs = SESSION; byId('timer').textContent = '14:59'; });
+
+  /* ---------- populate DOB selects ---------- */
+  function addOpt(sel, value, text) { var o = document.createElement('option'); o.value = value; o.text = text; sel.appendChild(o); }
+  var i;
+  addOpt(byId('dobM'), '', 'Month');
+  for (i = 0; i < 12; i++) addOpt(byId('dobM'), pad(i + 1), MONTHS[i]);
+  addOpt(byId('dobD'), '', 'Day');
+  for (i = 1; i <= 31; i++) addOpt(byId('dobD'), pad(i), pad(i));
+  addOpt(byId('dobY'), '', 'Year');
+  for (i = 1920; i <= 2010; i++) addOpt(byId('dobY'), String(i), String(i));
+
+  /* ---------- modal ---------- */
+  byId('b-ack').addEventListener('click', function () { byId('overlay').style.display = 'none'; });
+  byId('b-exit').addEventListener('click', function () { byId('overlay').style.display = 'none'; show('goodbye'); });
+
+  /* ---------- home ---------- */
+  byId('b-appeal').addEventListener('click', function () { show('step1'); });
+  byId('b-status').addEventListener('click', function () { show('status'); });
+  byId('b-print').addEventListener('click', function () { /* intentionally does nothing */ });
+  byId('b-status-home').addEventListener('click', function () { show('home'); });
+
+  /* ---------- step 1 ---------- */
+  function step1Continue() {
+    var cn = byId('claimNo').value.trim();
+    var m = byId('dobM').value, d = byId('dobD').value, y = byId('dobY').value, ok = true;
+    byId('e-claim').textContent = ''; byId('e-dob').textContent = ''; byId('m-draft').textContent = '';
+    if (!cn) { byId('e-claim').textContent = 'Claim number is required.'; ok = false; }
+    else if (cn !== CLAIM) { byId('e-claim').textContent = 'Claim number not found. Enter the claim number exactly as printed on the denial notice.'; ok = false; }
+    if (!m || !d || !y) { byId('e-dob').textContent = 'Please select the month, day and year of birth.'; ok = false; }
+    else if (!(m === '03' && d === '14' && y === '1957')) { byId('e-dob').textContent = 'Patient date of birth does not match our records for this claim.'; ok = false; }
+    if (!ok) return;
+    state.claimNumber = cn; state.dobMonth = m; state.dobDay = d; state.dobYear = y;
+    byId('s2claim').textContent = cn;
+    show('step2');
+  }
+  byId('b-s1next').addEventListener('click', step1Continue);
+  byId('claimNo').addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); step1Continue(); } });
+  byId('b-draft').addEventListener('click', function () {
+    var t = new Date();
+    byId('m-draft').textContent = 'Draft saved at ' + pad(t.getHours()) + ':' + pad(t.getMinutes()) + ':' + pad(t.getSeconds()) + '. Drafts are retained for 30 days.';
+  });
+
+  /* ---------- step 2 ---------- */
+  byId('b-s2back').addEventListener('click', function () { show('step1'); });
+  byId('b-s2next').addEventListener('click', function () {
+    var r = byId('reason'), j = byId('just').value, a = byId('attest').checked, ok = true;
+    byId('e-reason').textContent = ''; byId('e-just').textContent = ''; byId('e-attest').textContent = '';
+    if (!r.value) { byId('e-reason').textContent = 'Please select a reason for appeal.'; ok = false; }
+    if (j.trim().length < 40) { byId('e-just').textContent = 'Justification must be at least 40 characters (' + j.trim().length + ' entered).'; ok = false; }
+    if (!a) { byId('e-attest').textContent = 'You must attest that supporting records are attached.'; ok = false; }
+    if (!ok) return;
+    state.reason = r.value; state.reasonLabel = r.options[r.selectedIndex].text; state.justification = j; state.attested = true;
+    buildReview();
+    show('step3');
+  });
+
+  /* ---------- step 3 ---------- */
+  function buildReview() {
+    var dob = MONTHS[parseInt(state.dobMonth, 10) - 1] + ' ' + parseInt(state.dobDay, 10) + ', ' + state.dobYear +
+              ' (' + state.dobMonth + '/' + state.dobDay + '/' + state.dobYear + ')';
+    var rows = [
+      ['Claim Number', state.claimNumber],
+      ['Patient', 'WHITFIELD, DOLORES P'],
+      ['Patient Date of Birth', dob],
+      ['Reason for Appeal', state.reasonLabel],
+      ['Justification', state.justification],
+      ['Supporting Records Attached', state.attested ? 'Yes (attested)' : 'No'],
+      ['Submitting Terminal', SEAT]
+    ];
+    var h = '';
+    rows.forEach(function (r) { h += '<tr><th width="170">' + esc(r[0]) + '</th><td>' + esc(r[1]).replace(/\n/g, '<br>') + '</td></tr>'; });
+    byId('review').innerHTML = h;
+  }
+  byId('b-cancel').addEventListener('click', function () { clearState(); show('home'); });
+  byId('b-submit').addEventListener('click', function () {
+    var btn = byId('b-submit'), msg = byId('m-submit');
+    btn.disabled = true; msg.className = 'ok'; msg.textContent = 'Transmitting appeal to Claims Review Department...';
+    var body = { seat: SEAT, claimNumber: state.claimNumber, dobMonth: state.dobMonth, dobDay: state.dobDay, dobYear: state.dobYear,
+                 reason: state.reason, justification: state.justification, attested: state.attested };
+    fetch('/api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok) { throw new Error((j && j.error) || 'server rejected the appeal'); }
+        byId('refno').textContent = j.reference;
+        msg.textContent = '';
+        show('done');
+      })
+      .catch(function (e) { msg.className = 'err'; msg.textContent = 'Unable to transmit appeal (' + e.message + '). Please try again.'; })
+      .then(function () { btn.disabled = false; });
+  });
+
+  /* ---------- confirmation ---------- */
+  byId('b-home2').addEventListener('click', function () { clearState(); show('home'); });
+
+  clearState();
+  show('home');
+})();
+</script>
+</body>
+</html>

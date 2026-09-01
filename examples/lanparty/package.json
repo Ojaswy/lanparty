@@ -1,0 +1,50 @@
+{
+  "name": "lanparty",
+  "private": true,
+  "version": "0.1.0",
+  "description": "LANPARTY.EXE — a pass@k reliability harness for computer-use agents, built on Solari. Fork one task into k identical cloud browsers/desktops, watch every seat live in an isometric 2001 LAN party, get a reliability score and a divergence report.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c blue,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:demo": "concurrently -k -n server,web -c blue,magenta \"npm:dev:server:demo\" \"npm:dev:web\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:server:demo": "tsx watch server/index.ts --demo",
+    "dev:web": "vite --config web/vite.config.ts",
+    "build": "npm run typecheck && vite build --config web/vite.config.ts",
+    "start": "tsx server/index.ts",
+    "start:demo": "tsx server/index.ts --demo",
+    "typecheck": "tsc -p tsconfig.server.json --noEmit && tsc -p web/tsconfig.json --noEmit",
+    "smoke": "node scripts/smoke.mjs",
+    "test:unit": "tsx scripts/unit.ts",
+    "test": "npm run typecheck && npm run test:unit && npm run smoke"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.123.0",
+    "@novnc/novnc": "^1.7.0",
+    "@solarisdk/browser": "^0.1.2",
+    "@solarisdk/sdk": "^0.1.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "patchright-core": "^1.62.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sharp": "^0.35.4",
+    "ws": "^8.21.3",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/ws": "^8.5.12",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^9.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^8.2.2"
+  }
+}
